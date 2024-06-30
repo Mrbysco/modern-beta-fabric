@@ -1,12 +1,12 @@
 {
   "required": true,
-  "minVersion": "0.8",
+  "minVersion": "0.8.5",
   "package": "mod.bespectacled.modernbeta.mixin",
-  "compatibilityLevel": "JAVA_16",
+  "compatibilityLevel": "JAVA_21",
   "mixins": [
     "AccessorChunkGenerator",
     "AccessorChunkSection",
-    "AccessorPlacedFeature",
+    "AccessorNoiseChunk",
     "MixinFreezeTopLayerFeature",
     "MixinMinecraftServer",
     "MixinSpawnLocating",
@@ -14,6 +14,7 @@
     "MixinStructureGeneratorFactoryContext"
   ],
   "client": [
+    "client.AccessorMultilineTextField",
     "client.MixinBackgroundRenderer",
     "client.MixinBiomeColors",
     "client.MixinClientWorld",

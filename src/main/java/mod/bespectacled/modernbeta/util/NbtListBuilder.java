@@ -1,25 +1,25 @@
 package mod.bespectacled.modernbeta.util;
 
-import net.minecraft.nbt.NbtElement;
-import net.minecraft.nbt.NbtList;
+import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.Tag;
 
 public class NbtListBuilder {
-    private final NbtList list;
-    private int index;
-    
-    public NbtListBuilder() {
-        this.list = new NbtList();
-        this.index = 0;
-    }
-    
-    public NbtListBuilder add(NbtElement element) {
-        this.list.add(this.index, element);
-        index++;
-        
-        return this;
-    }
-    
-    public NbtList build() {
-        return this.list;
-    }
+	private final ListTag list;
+	private int index;
+
+	public NbtListBuilder() {
+		this.list = new ListTag();
+		this.index = 0;
+	}
+
+	public NbtListBuilder add(Tag element) {
+		this.list.add(this.index, element);
+		index++;
+
+		return this;
+	}
+
+	public ListTag build() {
+		return this.list;
+	}
 }

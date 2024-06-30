@@ -1,10 +1,9 @@
 package mod.bespectacled.modernbeta.mixin;
 
+import net.minecraft.world.level.levelgen.structure.pieces.PieceGeneratorSupplier;
 import org.spongepowered.asm.mixin.Mixin;
 
-import net.minecraft.structure.StructureGeneratorFactory;
-
-@Mixin(StructureGeneratorFactory.Context.class)
+@Mixin(PieceGeneratorSupplier.Context.class)
 public abstract class MixinStructureGeneratorFactoryContext {
     /*
     @Shadow private ChunkGenerator comp_306;

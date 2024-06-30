@@ -1,32 +1,32 @@
 package mod.bespectacled.modernbeta.world.chunk;
 
-import net.minecraft.world.gen.chunk.GenerationShapeConfig;
+import net.minecraft.world.level.levelgen.NoiseSettings;
 
 public class ModernBetaShapeConfigs {
-    @Deprecated
-    public static final GenerationShapeConfig MODERN_BETA;
-    public static final GenerationShapeConfig BETA;
-    public static final GenerationShapeConfig ALPHA;
-    public static final GenerationShapeConfig SKYLANDS;
-    public static final GenerationShapeConfig INFDEV_611;
-    public static final GenerationShapeConfig INFDEV_420;
-    public static final GenerationShapeConfig INFDEV_415;
-    public static final GenerationShapeConfig INFDEV_227;
-    public static final GenerationShapeConfig INDEV;
-    public static final GenerationShapeConfig CLASSIC_0_30;
-    public static final GenerationShapeConfig PE;
-    
-    static {
-        MODERN_BETA = GenerationShapeConfig.create(-64, 192, 1, 2);
-        BETA = GenerationShapeConfig.create(-64, 192, 1, 2);
-        ALPHA = GenerationShapeConfig.create(-64, 192, 1, 2);
-        SKYLANDS = GenerationShapeConfig.create(0, 128, 2, 1);
-        INFDEV_611 = GenerationShapeConfig.create(-64, 192, 1, 2);
-        INFDEV_420 = GenerationShapeConfig.create(-64, 192, 1, 2);
-        INFDEV_415 = GenerationShapeConfig.create(-64, 192, 1, 1);
-        INFDEV_227 = GenerationShapeConfig.create(-64, 192, 1, 2);
-        INDEV = GenerationShapeConfig.create(0, 256, 1, 2);
-        CLASSIC_0_30 = GenerationShapeConfig.create(0, 256, 1, 2);
-        PE = GenerationShapeConfig.create(-64, 192, 1, 2);
-    }
+	@Deprecated
+	public static final NoiseSettings MODERN_BETA;
+	public static final NoiseSettings BETA;
+	public static final NoiseSettings ALPHA;
+	public static final NoiseSettings SKYLANDS;
+	public static final NoiseSettings INFDEV_611;
+	public static final NoiseSettings INFDEV_420;
+	public static final NoiseSettings INFDEV_415;
+	public static final NoiseSettings INFDEV_227;
+	public static final NoiseSettings INDEV;
+	public static final NoiseSettings CLASSIC_0_30;
+	public static final NoiseSettings PE;
+
+	static {
+		MODERN_BETA = NoiseSettings.create(-64, 192, 1, 2);
+		BETA = NoiseSettings.create(-64, 192, 1, 2);
+		ALPHA = NoiseSettings.create(-64, 192, 1, 2);
+		SKYLANDS = NoiseSettings.create(0, 128, 2, 1);
+		INFDEV_611 = NoiseSettings.create(-64, 192, 1, 2);
+		INFDEV_420 = NoiseSettings.create(-64, 192, 1, 2);
+		INFDEV_415 = NoiseSettings.create(-64, 192, 1, 1);
+		INFDEV_227 = NoiseSettings.create(-64, 192, 1, 2);
+		INDEV = NoiseSettings.create(0, 256, 1, 2);
+		CLASSIC_0_30 = NoiseSettings.create(0, 256, 1, 2);
+		PE = NoiseSettings.create(-64, 192, 1, 2);
+	}
 }

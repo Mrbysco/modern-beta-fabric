@@ -1,18 +1,18 @@
 package mod.bespectacled.modernbeta.world.cavebiome.provider;
 
 import mod.bespectacled.modernbeta.api.world.cavebiome.CaveBiomeProvider;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.registry.RegistryEntryLookup;
-import net.minecraft.registry.entry.RegistryEntry;
-import net.minecraft.world.biome.Biome;
+import net.minecraft.core.Holder;
+import net.minecraft.core.HolderGetter;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.level.biome.Biome;
 
 public class CaveBiomeProviderNone extends CaveBiomeProvider {
-    public CaveBiomeProviderNone(NbtCompound settings, RegistryEntryLookup<Biome> biomeRegistry, long seed) {
-        super(settings, biomeRegistry, seed);
-    }
+	public CaveBiomeProviderNone(CompoundTag settings, HolderGetter<Biome> biomeRegistry, long seed) {
+		super(settings, biomeRegistry, seed);
+	}
 
-    @Override
-    public RegistryEntry<Biome> getBiome(int biomeX, int biomeY, int biomeZ) {
-        return null;
-    }
+	@Override
+	public Holder<Biome> getBiome(int biomeX, int biomeY, int biomeZ) {
+		return null;
+	}
 }

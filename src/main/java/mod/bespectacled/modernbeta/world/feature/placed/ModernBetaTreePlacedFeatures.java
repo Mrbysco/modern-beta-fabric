@@ -2,24 +2,24 @@ package mod.bespectacled.modernbeta.world.feature.placed;
 
 import mod.bespectacled.modernbeta.world.feature.ModernBetaFeatureTags;
 import mod.bespectacled.modernbeta.world.feature.configured.ModernBetaTreeConfiguredFeatures;
-import net.minecraft.block.Blocks;
-import net.minecraft.registry.Registerable;
-import net.minecraft.registry.RegistryEntryLookup;
-import net.minecraft.registry.RegistryKey;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.registry.entry.RegistryEntry;
-import net.minecraft.world.gen.feature.ConfiguredFeature;
-import net.minecraft.world.gen.feature.PlacedFeature;
-import net.minecraft.world.gen.feature.PlacedFeatures;
+import net.minecraft.core.Holder;
+import net.minecraft.core.HolderGetter;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.data.worldgen.BootstrapContext;
+import net.minecraft.data.worldgen.placement.PlacementUtils;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
+import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 
 public class ModernBetaTreePlacedFeatures {
-    public static final RegistryKey<PlacedFeature> FANCY_OAK = ModernBetaPlacedFeatures.of(ModernBetaFeatureTags.FANCY_OAK);
+	public static final ResourceKey<PlacedFeature> FANCY_OAK = ModernBetaPlacedFeatures.of(ModernBetaFeatureTags.FANCY_OAK);
 
-    public static void bootstrap(Registerable<PlacedFeature> featureRegisterable) {
-        RegistryEntryLookup<ConfiguredFeature<?, ?>> registryConfigured = featureRegisterable.getRegistryLookup(RegistryKeys.CONFIGURED_FEATURE);
-        
-        RegistryEntry.Reference<ConfiguredFeature<?, ?>> fancyOak = registryConfigured.getOrThrow(ModernBetaTreeConfiguredFeatures.FANCY_OAK);
+	public static void bootstrap(BootstrapContext<PlacedFeature> featureRegisterable) {
+		HolderGetter<ConfiguredFeature<?, ?>> registryConfigured = featureRegisterable.lookup(Registries.CONFIGURED_FEATURE);
 
-        PlacedFeatures.register(featureRegisterable, FANCY_OAK, fancyOak, PlacedFeatures.wouldSurvive(Blocks.OAK_SAPLING));
-    }
+		Holder.Reference<ConfiguredFeature<?, ?>> fancyOak = registryConfigured.getOrThrow(ModernBetaTreeConfiguredFeatures.FANCY_OAK);
+
+		PlacementUtils.register(featureRegisterable, FANCY_OAK, fancyOak, PlacementUtils.filteredByBlockSurvival(Blocks.OAK_SAPLING));
+	}
 }

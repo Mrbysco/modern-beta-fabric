@@ -1,32 +1,32 @@
 package mod.bespectacled.modernbeta.world.cavebiome.provider;
 
+import mod.bespectacled.modernbeta.api.world.cavebiome.CaveBiomeProvider;
+import net.minecraft.core.Holder;
+import net.minecraft.core.HolderGetter;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.biome.Biome;
+
 import java.util.List;
 
-import mod.bespectacled.modernbeta.api.world.cavebiome.CaveBiomeProvider;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.registry.RegistryEntryLookup;
-import net.minecraft.registry.RegistryKey;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.registry.entry.RegistryEntry;
-import net.minecraft.util.Identifier;
-import net.minecraft.world.biome.Biome;
-
 public class CaveBiomeProviderSingle extends CaveBiomeProvider {
-    private final RegistryKey<Biome> biome;
-    
-    public CaveBiomeProviderSingle(NbtCompound settings, RegistryEntryLookup<Biome> biomeRegistry, long seed) {
-        super(settings, biomeRegistry, seed);
+	private final ResourceKey<Biome> biome;
 
-        this.biome = RegistryKey.of(RegistryKeys.BIOME, new Identifier(this.settings.singleBiome));
-    }
+	public CaveBiomeProviderSingle(CompoundTag settings, HolderGetter<Biome> biomeRegistry, long seed) {
+		super(settings, biomeRegistry, seed);
 
-    @Override
-    public RegistryEntry<Biome> getBiome(int biomeX, int biomeY, int biomeZ) {
-        return this.biomeRegistry.getOrThrow(this.biome);
-    }
-    
-    @Override
-    public List<RegistryEntry<Biome>> getBiomes() {
-        return List.of(this.biomeRegistry.getOrThrow(this.biome));
-    }
+		this.biome = ResourceKey.create(Registries.BIOME, ResourceLocation.tryParse(this.settings.singleBiome));
+	}
+
+	@Override
+	public Holder<Biome> getBiome(int biomeX, int biomeY, int biomeZ) {
+		return this.biomeRegistry.getOrThrow(this.biome);
+	}
+
+	@Override
+	public List<Holder<Biome>> getBiomes() {
+		return List.of(this.biomeRegistry.getOrThrow(this.biome));
+	}
 }

@@ -1,45 +1,83 @@
 package mod.bespectacled.modernbeta.config;
 
-import me.shedaniel.autoconfig.ConfigData;
-import me.shedaniel.autoconfig.annotation.Config;
-import me.shedaniel.autoconfig.annotation.ConfigEntry;
 import mod.bespectacled.modernbeta.ModernBeta;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.event.config.ModConfigEvent;
+import net.neoforged.neoforge.common.ModConfigSpec;
+import org.apache.commons.lang3.tuple.Pair;
 
-@Config(name = ModernBeta.MOD_ID)
-public class ModernBetaConfig implements ConfigData {
-    @ConfigEntry.Category(value = "fixedSeed")
-    @ConfigEntry.Gui.Tooltip(count = 4)
-    public String fixedSeed = "";
+public class ModernBetaConfig {
+	public static class Common {
+		public final ModConfigSpec.ConfigValue<? extends String> fixedSeed;
+		public final ModConfigSpec.BooleanValue useFixedSeed;
+		public final ModConfigSpec.BooleanValue useBetaSkyColor;
+		public final ModConfigSpec.BooleanValue useBetaBiomeColor;
+		public final ModConfigSpec.BooleanValue useBetaWaterColor;
+		public final ModConfigSpec.BooleanValue usePEBetaSkyColor;
+		public final ModConfigSpec.BooleanValue usePEBetaBiomeColor;
+		public final ModConfigSpec.BooleanValue usePEBetaWaterColor;
+		public final ModConfigSpec.BooleanValue useOldFogColor;
 
-    @ConfigEntry.Category(value = "fixedSeed")
-    @ConfigEntry.Gui.Tooltip(count = 3)
-    public boolean useFixedSeed = false;
-    
-    @ConfigEntry.Category(value = "betaBiomeColor")
-    @ConfigEntry.Gui.Tooltip(count = 2)
-    public boolean useBetaSkyColor = true;
+		Common(ModConfigSpec.Builder builder) {
+			builder.comment("General settings")
+					.push("General");
 
-    @ConfigEntry.Category(value = "betaBiomeColor")
-    @ConfigEntry.Gui.Tooltip(count = 3)
-    public boolean useBetaBiomeColor = true;
+			fixedSeed = builder
+					.comment("Fixed Seed [Default: \"\"]")
+					.define("fixedSeed", "");
 
-    @ConfigEntry.Category(value = "betaBiomeColor")
-    @ConfigEntry.Gui.Tooltip(count = 3)
-    public boolean useBetaWaterColor = false;
+			useFixedSeed = builder
+					.comment("Use Fixed Seed [Default: false]")
+					.define("useFixedSeed", false);
 
-    @ConfigEntry.Category(value = "peBiomeColor")
-    @ConfigEntry.Gui.Tooltip(count = 2)
-    public boolean usePEBetaSkyColor = false;
+			useBetaSkyColor = builder
+					.comment("Use Beta Sky Color [Default: true]")
+					.define("useBetaSkyColor", true);
 
-    @ConfigEntry.Category(value = "peBiomeColor")
-    @ConfigEntry.Gui.Tooltip(count = 3)
-    public boolean usePEBetaBiomeColor = false;
+			useBetaBiomeColor = builder
+					.comment("Use Beta Biome Color [Default: true]")
+					.define("useBetaBiomeColor", true);
 
-    @ConfigEntry.Category(value = "peBiomeColor")
-    @ConfigEntry.Gui.Tooltip(count = 3)
-    public boolean usePEBetaWaterColor = false;
+			useBetaWaterColor = builder
+					.comment("Use Beta Water Color [Default: false]")
+					.define("useBetaWaterColor", false);
 
-    @ConfigEntry.Category(value = "other")
-    @ConfigEntry.Gui.Tooltip(count = 2)
-    public boolean useOldFogColor = true;
+			usePEBetaSkyColor = builder
+					.comment("Use PE Beta Sky Color [Default: false]")
+					.define("usePEBetaSkyColor", false);
+
+			usePEBetaBiomeColor = builder
+					.comment("Use PE Beta Biome Color [Default: false]")
+					.define("usePEBetaBiomeColor", false);
+
+			usePEBetaWaterColor = builder
+					.comment("Use PE Beta Water Color [Default: false]")
+					.define("usePEBetaWaterColor", false);
+
+			useOldFogColor = builder
+					.comment("Use Old Fog Color [Default: true]")
+					.define("useOldFogColor", true);
+
+			builder.pop();
+		}
+	}
+
+	public static final ModConfigSpec commonSpec;
+	public static final Common COMMON;
+
+	static {
+		final Pair<Common, ModConfigSpec> specPair = new ModConfigSpec.Builder().configure(Common::new);
+		commonSpec = specPair.getRight();
+		COMMON = specPair.getLeft();
+	}
+
+	@SubscribeEvent
+	public static void onLoad(final ModConfigEvent.Loading configEvent) {
+		ModernBeta.LOGGER.debug("Loaded Modern Beta's config file {}", configEvent.getConfig().getFileName());
+	}
+
+	@SubscribeEvent
+	public static void onFileChange(final ModConfigEvent.Reloading configEvent) {
+		ModernBeta.LOGGER.debug("Modern Beta's config just got changed on the file system!");
+	}
 }

@@ -1,32 +1,28 @@
 package mod.bespectacled.modernbeta.world.feature;
 
 import mod.bespectacled.modernbeta.ModernBeta;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
-import net.minecraft.world.gen.feature.DefaultFeatureConfig;
-import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.LakeFeature;
-import net.minecraft.world.gen.feature.OreFeatureConfig;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.world.level.levelgen.feature.Feature;
+import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
+import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguration;
+import net.neoforged.neoforge.registries.DeferredRegister;
+
+import java.util.function.Supplier;
 
 @SuppressWarnings("deprecation")
 public class ModernBetaFeatures {
-    public static final BetaFreezeTopLayerFeature FREEZE_TOP_LAYER = (BetaFreezeTopLayerFeature) register(
-        ModernBetaFeatureTags.FREEZE_TOP_LAYER, new BetaFreezeTopLayerFeature(DefaultFeatureConfig.CODEC)
-    );
+	public static final DeferredRegister<Feature<?>> FEATURES = DeferredRegister.create(BuiltInRegistries.FEATURE, ModernBeta.MOD_ID);
 
-    public static final BetaFancyOakFeature OLD_FANCY_OAK = (BetaFancyOakFeature) register(
-        ModernBetaFeatureTags.FANCY_OAK, new BetaFancyOakFeature(DefaultFeatureConfig.CODEC)
-    );
-    
-    public static final BetaOreClayFeature ORE_CLAY = (BetaOreClayFeature) register(
-        ModernBetaFeatureTags.ORE_CLAY, new BetaOreClayFeature(OreFeatureConfig.CODEC)
-    );
-    
-    public static final Feature<LakeFeature.Config> LAKE_WATER = Feature.LAKE;
-    
-    private static Feature<?> register(String id, Feature<?> feature) {
-        return Registry.register(Registries.FEATURE, ModernBeta.createId(id), feature);
-    }
-    
-    public static void register() {}
+
+	public static final Supplier<BetaFreezeTopLayerFeature> FREEZE_TOP_LAYER = FEATURES.register(
+			ModernBetaFeatureTags.FREEZE_TOP_LAYER, () -> new BetaFreezeTopLayerFeature(NoneFeatureConfiguration.CODEC)
+	);
+
+	public static final Supplier<BetaFancyOakFeature> OLD_FANCY_OAK = FEATURES.register(
+			ModernBetaFeatureTags.FANCY_OAK, () -> new BetaFancyOakFeature(NoneFeatureConfiguration.CODEC)
+	);
+
+	public static final Supplier<BetaOreClayFeature> ORE_CLAY = FEATURES.register(
+			ModernBetaFeatureTags.ORE_CLAY, () -> new BetaOreClayFeature(OreConfiguration.CODEC)
+	);
 }

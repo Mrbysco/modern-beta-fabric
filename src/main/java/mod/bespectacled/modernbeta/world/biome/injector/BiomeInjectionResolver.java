@@ -1,11 +1,11 @@
 package mod.bespectacled.modernbeta.world.biome.injector;
 
-import net.minecraft.registry.entry.RegistryEntry;
-import net.minecraft.world.biome.Biome;
+import net.minecraft.core.Holder;
+import net.minecraft.world.level.biome.Biome;
 
 @FunctionalInterface
 public interface BiomeInjectionResolver {
-    public static final BiomeInjectionResolver DEFAULT = (biomeX, biomeY, biomeZ) -> null;
-    
-    public RegistryEntry<Biome> apply(int biomeX, int biomeY, int biomeZ);
+	public static final BiomeInjectionResolver DEFAULT = (biomeX, biomeY, biomeZ) -> null;
+
+	public Holder<Biome> apply(int biomeX, int biomeY, int biomeZ);
 }

@@ -1,15 +1,14 @@
 package mod.bespectacled.modernbeta.mixin;
 
+import net.minecraft.core.Holder;
+import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.chunk.LevelChunkSection;
+import net.minecraft.world.level.chunk.PalettedContainerRO;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
 
-import net.minecraft.registry.entry.RegistryEntry;
-import net.minecraft.world.biome.Biome;
-import net.minecraft.world.chunk.ChunkSection;
-import net.minecraft.world.chunk.ReadableContainer;
-
-@Mixin(ChunkSection.class)
+@Mixin(LevelChunkSection.class)
 public interface AccessorChunkSection {
-    @Accessor("biomeContainer")
-    public void setBiomeContainer(ReadableContainer<RegistryEntry<Biome>> biomeContainer);
+	@Accessor("biomes")
+	public void setBiomes(PalettedContainerRO<Holder<Biome>> biomeContainer);
 }

@@ -2,24 +2,24 @@ package mod.bespectacled.modernbeta.world.feature.placed;
 
 import mod.bespectacled.modernbeta.world.feature.ModernBetaFeatureTags;
 import mod.bespectacled.modernbeta.world.feature.configured.ModernBetaMiscConfiguredFeatures;
-import net.minecraft.registry.Registerable;
-import net.minecraft.registry.RegistryEntryLookup;
-import net.minecraft.registry.RegistryKey;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.registry.entry.RegistryEntry;
-import net.minecraft.world.gen.feature.ConfiguredFeature;
-import net.minecraft.world.gen.feature.PlacedFeature;
-import net.minecraft.world.gen.feature.PlacedFeatures;
-import net.minecraft.world.gen.placementmodifier.BiomePlacementModifier;
+import net.minecraft.core.Holder;
+import net.minecraft.core.HolderGetter;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.data.worldgen.BootstrapContext;
+import net.minecraft.data.worldgen.placement.PlacementUtils;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
+import net.minecraft.world.level.levelgen.placement.BiomeFilter;
+import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 
 public class ModernBetaMiscPlacedFeatures {
-    public static final RegistryKey<PlacedFeature> FREEZE_TOP_LAYER = ModernBetaPlacedFeatures.of(ModernBetaFeatureTags.FREEZE_TOP_LAYER);
-    
-    public static void bootstrap(Registerable<PlacedFeature> featureRegisterable) {
-        RegistryEntryLookup<ConfiguredFeature<?, ?>> registryConfigured = featureRegisterable.getRegistryLookup(RegistryKeys.CONFIGURED_FEATURE);
+	public static final ResourceKey<PlacedFeature> FREEZE_TOP_LAYER = ModernBetaPlacedFeatures.of(ModernBetaFeatureTags.FREEZE_TOP_LAYER);
 
-        RegistryEntry.Reference<ConfiguredFeature<?, ?>> freezeTopLayer = registryConfigured.getOrThrow(ModernBetaMiscConfiguredFeatures.FREEZE_TOP_LAYER);
-        
-        PlacedFeatures.register(featureRegisterable, FREEZE_TOP_LAYER, freezeTopLayer, BiomePlacementModifier.of());
-    }
+	public static void bootstrap(BootstrapContext<PlacedFeature> featureRegisterable) {
+		HolderGetter<ConfiguredFeature<?, ?>> registryConfigured = featureRegisterable.lookup(Registries.CONFIGURED_FEATURE);
+
+		Holder.Reference<ConfiguredFeature<?, ?>> freezeTopLayer = registryConfigured.getOrThrow(ModernBetaMiscConfiguredFeatures.FREEZE_TOP_LAYER);
+
+		PlacementUtils.register(featureRegisterable, FREEZE_TOP_LAYER, freezeTopLayer, BiomeFilter.biome());
+	}
 }
