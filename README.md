@@ -1,4 +1,4 @@
-# Modern Beta for Fabric
+# Modern Beta for NeoForge
 
 ![Modern Beta Banner](https://i.imgur.com/9703CzG.png)
 
